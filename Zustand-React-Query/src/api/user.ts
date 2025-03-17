@@ -5,6 +5,8 @@ export type GetUsersFilters = {
   page: number;
 };
 
+
+
 export async function getUsers(filters?: GetUsersFilters) {
   // Do something cool with the filters
 
