@@ -1,4 +1,5 @@
 import CourseForm from "./components/CourseForm"
+import CourseList from "./components/CourseList";
 
 
 const appStyle = {
@@ -13,9 +14,10 @@ const appStyle = {
 const App = () => {
   return (
     <div style={appStyle}>
-      Zustand Tutorial - Hitesh Choudhary
-      <CourseForm/>
+      <h3 style={{fontSize: '1.5rem'}}> My Course List</h3>
+      <CourseForm />
+      <CourseList/>
     </div>
-  )
+  );
 }
 export default App

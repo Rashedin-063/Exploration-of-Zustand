@@ -22,10 +22,11 @@ ul {
 }
 
 .form-input {
-  padding: 0.75rem;
+  padding: 0.82rem;
   outline: none;
-  border: 1px solid rgb(247, 247, 247);
+  border: 1px solid rgb(88, 86, 86);
   width: 18rem;
+  background: #d6d3d3;
 }
 
 .form-submit-btn {
