@@ -1,3 +1,4 @@
+import CourseForm from "./components/CourseForm"
 
 
 const appStyle = {
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <div style={appStyle}>
       Zustand Tutorial - Hitesh Choudhary
+      <CourseForm/>
     </div>
   )
 }
