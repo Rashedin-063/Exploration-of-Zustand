@@ -24,13 +24,16 @@ console.log(courses, removeCourse, toggleCourseStatus);
             <li
               className={`course-item`}
               style={{
-                backgroudColor: course.completed ? '#00FF0044' : 'white',
+                backgroundColor: course.completed ? '#00FF0044' : 'white',
+                border: course.completed ? '1px solid rgba(5, 124, 5, 0.27)' : '1px solid white',
               }}
             >
               <span className='course-item-col-1'>
                 <input
+                  checked={course.completed}
                   // checked={course.completed}
                   type='checkbox'
+                  onChange={(e) => toggleCourseStatus(course.id)}
                   // onChange={(e) => {
                   //   toggleCourseStatus(course.id);
                   // }}
@@ -38,6 +41,9 @@ console.log(courses, removeCourse, toggleCourseStatus);
               </span>
               <span>{course?.title}</span>
               <button
+                onClick={() => {
+                  removeCourse(course.id);
+                }}
                 // onClick={() => {
                 //   removeCourse(course.id);
                 // }}
