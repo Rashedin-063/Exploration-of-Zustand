@@ -4,13 +4,14 @@ import useCourseStore from "../app/courseStore"
 
 
 const CourseList = () => {
-    const {courses, removeCourse, toggleCourseStatus} = useCourseStore(
-        (state) => ({
-            courses: state.courses,
-            removeCourse: state.removeCourse,
-            toggleCourseStatus: state.toggleCourseStatus
-        })
-    )
+    // const courses = useCourseStore((state) => state.courses);
+    // const removeCourse = useCourseStore((state) => state.removeCourse);
+    // const toggleCourseStatus = useCourseStore(
+    //   (state) => state.toggleCourseStatus
+  // );
+  const courses = useCourseStore((state) => state.courses);
+  const removeCourse = useCourseStore((state) => state.removeCourse);
+  const toggleCourseStatus = useCourseStore((state) => state.toggleCourseStatus)
 
 console.log(courses, removeCourse, toggleCourseStatus);
 
