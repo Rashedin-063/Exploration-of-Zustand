@@ -40,7 +40,7 @@ interface CartItem {
 export default function Cart() {
   // const { items, removeFromCart, updateQty } = useCartStore((state) => state);
   // const { } = useCartStore((state) => state);
-  const { items, removeFromCart } = useCartStore((state) => state)
+  const { items, removeFromCart, updateQty } = useCartStore((state) => state)
 
   
   const subtotal = items.reduce(
@@ -54,7 +54,7 @@ export default function Cart() {
     <div className='min-h-screen bg-gray-100'>
       <main className='max-w-7xl mx-auto py-6 sm:px-6 lg:px-8'>
         <h1 className='text-3xl font-bold text-gray-900 mb-6'>
-          {/* Your Cart({items.reduce((sum, i) => sum + i.quantity, 0)}) */}
+          Your Cart({items.reduce((sum, i) => sum + i.quantity, 0)})
         </h1>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <div className='md:col-span-2'>
@@ -77,6 +77,7 @@ export default function Cart() {
                   <p className='text-gray-600'>${item.price.toFixed(2)}</p>
                   <div className='flex items-center mt-2'>
                     <Button
+                      onClick={() => updateQty('decrement', item.id)}
                       // onClick={() => updateQty('decrement', item.id)}
                       variant='outline'
                       size='sm'
@@ -85,6 +86,7 @@ export default function Cart() {
                     </Button>
                     <span className='mx-2'>{item.quantity}</span>
                     <Button
+                      onClick={() => updateQty('increment', item.id)}
                       // onClick={() => updateQty('increment', item.id)}
                       variant='outline'
                       size='sm'
@@ -94,7 +96,7 @@ export default function Cart() {
                   </div>
                 </div>
                 <Button
-                onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item.id)}
                   // onClick={() => removeFromCart(item.id)}
                   variant='destructive'
                   size='sm'

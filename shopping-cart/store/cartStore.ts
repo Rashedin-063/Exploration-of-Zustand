@@ -80,26 +80,32 @@ const useCartStore = create<CartState>()(
           })
           toast.success('Item removed')
         },
-        updateQty: (type) => {}
+        updateQty: (type, id) => {
+          const item = get().items.find((item) => item.id === id)
+     
+          if (!item) {
+            return;
+          }
+          // remove the item if quantity is 0
+          if (item.quantity === 1 && type === 'decrement') {
+            get().removeFromCart(id);
+          } else {
+            item.quantity =
+              type === 'increment' ? item.quantity + 1 : item.quantity - 1;
+               set({
+            items: [...get().items],
+          });
+          }
+        }
       }),
       { name: 'cart-storage' }
     )
   )
 );
 
-
-
-
-
 // const useCartStore = create<CartState>()(
 //   persist(
 //     (set, get) => ({
-//       removeFromCart: (id) => {
-//         set({
-//           items: get().items.filter((item) => item.id !== id),
-//         });
-//         toast.success('Item removed');
-//       },
 //       updateQty: (type, id) => {
 //         const item = get().items.find((item) => item.id === id);
 //         if (!item) {
