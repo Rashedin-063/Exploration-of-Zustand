@@ -40,7 +40,7 @@ interface CartItem {
 export default function Cart() {
   // const { items, removeFromCart, updateQty } = useCartStore((state) => state);
   // const { } = useCartStore((state) => state);
-  const { items, addToCart } = useCartStore((state) => state)
+  const { items, removeFromCart } = useCartStore((state) => state)
 
   
   const subtotal = items.reduce(
@@ -94,6 +94,7 @@ export default function Cart() {
                   </div>
                 </div>
                 <Button
+                onClick={() => removeFromCart(item.id)}
                   // onClick={() => removeFromCart(item.id)}
                   variant='destructive'
                   size='sm'

@@ -74,7 +74,12 @@ const useCartStore = create<CartState>()(
             toast.success('Product Added successfully');
           }
         },
-        removeFromCart: (id) => { },
+        removeFromCart: (id) => { 
+          set({
+            items: get().items.filter(item => item.id !==id)
+          })
+          toast.success('Item removed')
+        },
         updateQty: (type) => {}
       }),
       { name: 'cart-storage' }
@@ -89,31 +94,6 @@ const useCartStore = create<CartState>()(
 // const useCartStore = create<CartState>()(
 //   persist(
 //     (set, get) => ({
-//       items: [],
-//       addToCart: (product) => {
-//         const existingProduct = get().items.find(
-//           (item) => item.id === product.id
-//         );
-//         set({
-//           items: existingProduct
-//             ? get().items
-//             : [
-//                 ...get().items,
-//                 {
-//                   quantity: 1,
-//                   id: product.id,
-//                   title: product.title,
-//                   price: product.price,
-//                   image: product.images[0],
-//                 },
-//               ],
-//         });
-//         if (existingProduct) {
-//           toast.error('Product Already exists');
-//         } else {
-//           toast.success('Product Added successfully');
-//         }
-//       },
 //       removeFromCart: (id) => {
 //         set({
 //           items: get().items.filter((item) => item.id !== id),
