@@ -1,30 +1,28 @@
-import {create} from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-
-
-// create the types for the state
-type CountState = {
-  count: number,
-  increment: () => void,
-  decrement: () => void
+import { create } from "zustand";
+import { devtools, persist } from 'zustand/middleware';
+// Create the Types for the state
+interface CountState {
+  count: number;
+  increment: () => void;
+  decrement: () => void;
+  reset: () => void;
 }
 
 
-const useCounterStore = create<CountState>(
+const useCounterStore = create<CountState>()(
   devtools(
     persist(
-      (state) => ({
+      (set) => ({
         count: 0,
-        increment: () => set((state) => {
-          if(state.count > 0){
-            count: state.count + 1
-          }
-          count: 0
-        })
-        decrement: () => set((state) => count: state.count + -)
-      })
+        increment: () => set((state) => ({ count: state.count + 1 })),
+        decrement: () => set((state) => {
+          return { count: state.count > 0 ? state.count - 1 : 0 }
+        }),
+        reset: () => set(() => ({count: 0}))
+      }),
+      { name: "counter-storage" } // Persist needs a config object
     )
   )
 )
 
-export default useCounterStore
+export default useCounterStore;

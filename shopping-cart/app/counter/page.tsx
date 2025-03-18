@@ -1,14 +1,14 @@
 "use client";
-
-import { useState } from "react";
+import useCounterStore from "@/store/counterStore";
 import { Button } from "@/components/ui/button";
 
 export default function CounterPage() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
+  const {count, increment, decrement, reset} = useCounterStore((state) => state)
 
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => prev - 1);
-  const reset = () => setCount(0);
+  // const increment = () => setCount((prev) => prev + 1);
+  // const decrement = () => setCount((prev) => prev - 1);
+  // const reset = () => setCount(0);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
