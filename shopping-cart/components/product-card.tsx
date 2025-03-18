@@ -4,8 +4,9 @@ import { Product } from "@/types/types";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <img
+    <div className="bg-white rounded-lg shadow-md overflow-hidden pb-4" >
+      <div className='flex-1 h-80'>
+        <img
         src={product.images[0]}
         alt={product.title}
         width={300}
@@ -17,8 +18,12 @@ export function ProductCard({ product }: { product: Product }) {
           {product.title}
         </h2>
         <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
-        <Button className="w-full">Add to Cart</Button>
       </div>
+      </div>
+           <div className='px-4'>
+              <Button className="w-full">Add to Cart</Button>
+           </div>
+   
     </div>
   );
 }
