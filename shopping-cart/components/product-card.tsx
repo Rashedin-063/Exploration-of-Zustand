@@ -5,6 +5,7 @@ import useCartStore from '@/store/cartStore';
 
 export function ProductCard({ product }: { product: Product }) {
   // const addToCart = useCartStore((state) => state.addToCart);
+  const addToCart = useCartStore((state) => state.addToCart)
   return (
     <div className='bg-white rounded-lg shadow-md overflow-hidden pb-4'>
       <div className='flex-1 h-80'>
@@ -23,7 +24,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
       <div className='px-4'>
-        <Button  className='w-full'>
+        <Button onClick={() => addToCart(product)} className='w-full'>
           Add to Cart
         </Button>
       </div>

@@ -1,7 +1,7 @@
 'use client';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import useCartStore from '@/store/cartStore';
+import { useEffect } from 'react';
 
 interface CartItem {
   id: number;
@@ -11,33 +11,38 @@ interface CartItem {
   image: string;
 }
 
-const items: CartItem = [
-  {
-    id: 1,
-    title: 'Product 1',
-    price: 19.99,
-    quantity: 2,
-    image: '/images/red.jpeg?height=80&width=80',
-  },
-  {
-    id: 2,
-    title: 'Product 2',
-    price: 29.99,
-    quantity: 1,
-    image: '/images/gray.jpeg?height=80&width=80',
-  },
-  {
-    id: 3,
-    title: 'Product 3',
-    price: 39.99,
-    quantity: 3,
-    image: '/images/black.jpeg?height=80&width=80',
-  },
-];
+// const items: CartItem = [
+//   {
+//     id: 1,
+//     title: 'Product 1',
+//     price: 19.99,
+//     quantity: 2,
+//     image: '/images/red.jpeg?height=80&width=80',
+//   },
+//   {
+//     id: 2,
+//     title: 'Product 2',
+//     price: 29.99,
+//     quantity: 1,
+//     image: '/images/gray.jpeg?height=80&width=80',
+//   },
+//   {
+//     id: 3,
+//     title: 'Product 3',
+//     price: 39.99,
+//     quantity: 3,
+//     image: '/images/black.jpeg?height=80&width=80',
+//   },
+// ];
+
+
 
 export default function Cart() {
   // const { items, removeFromCart, updateQty } = useCartStore((state) => state);
   // const { } = useCartStore((state) => state);
+  const { items, addToCart } = useCartStore((state) => state)
+
+  
   const subtotal = items.reduce(
     (total, item) => total + item.price * item.quantity,
     0

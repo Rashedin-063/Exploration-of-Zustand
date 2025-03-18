@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 import { Product } from '@/types/types';
 import toast from 'react-hot-toast';
 
@@ -19,9 +19,72 @@ interface CartState {
   updateQty: (type: 'increment' | 'decrement', id: number) => void;
 }
 
-const useCartStore = create<CartState>()(
+// const demoItems: CartItem = [
+//   {
+//     id: 1,
+//     title: 'Product 1',
+//     price: 19.99,
+//     quantity: 2,
+//     image: '/images/red.jpeg?height=80&width=80',
+//   },
+//   {
+//     id: 2,
+//     title: 'Product 2',
+//     price: 29.99,
+//     quantity: 1,
+//     image: '/images/gray.jpeg?height=80&width=80',
+//   },
+//   {
+//     id: 3,
+//     title: 'Product 3',
+//     price: 39.99,
+//     quantity: 3,
+//     image: '/images/black.jpeg?height=80&width=80',
+//   },
+// ];
 
-)
+const useCartStore = create<CartState>()(
+  devtools(
+    persist(
+      (set, get) => ({
+        items: [],
+        addToCart: (product) => {
+          const existingProduct = get().items.find(
+            (item) => item.id === product.id
+          );
+          console.log(existingProduct);
+
+          set({
+            items: existingProduct
+              ? get().items
+              : [
+                  ...get().items,
+                  {
+                    quantity: 1,
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    image: product.images[0],
+                  },
+                ],
+          });
+          if (existingProduct) {
+            toast.error('Product Already exists');
+          } else {
+            toast.success('Product Added successfully');
+          }
+        },
+        removeFromCart: (id) => { },
+        updateQty: (type) => {}
+      }),
+      { name: 'cart-storage' }
+    )
+  )
+);
+
+
+
+
 
 // const useCartStore = create<CartState>()(
 //   persist(
